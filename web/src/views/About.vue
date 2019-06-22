@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <base-list :user="username"></base-list>
+    <base-list></base-list>
   </div>
 </template>
 
