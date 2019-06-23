@@ -2,12 +2,13 @@
   <div class="about">
     <h1>This is an about page</h1>
     <base-list></base-list>
+    <echart-table></echart-table>
   </div>
 </template>
 
 <script>
 import baseList from "@/components/parent.vue";
-// import baseItem from "@/components/child.vue";
+import EchartTable from "@/echarts/index.vue";
 
 export default {
   data() {
@@ -19,8 +20,8 @@ export default {
   methods: {},
   computed: {},
   components: {
-    baseList
-    // baseItem
+    baseList,
+    EchartTable
   }
 };
 </script>
