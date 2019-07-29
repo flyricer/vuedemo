@@ -11,10 +11,10 @@
 export default {
   data() {
     return {
-      person: {
-        firstname: "jack",
-        lastname: "ma"
-      }
+      // person: {
+      //   firstname: "jack",
+      //   lastname: "ma"
+      // }
     };
   }
 };

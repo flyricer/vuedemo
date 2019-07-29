@@ -4,10 +4,12 @@ import router from "./router";
 import store from "./store";
 import directives from "./directives.js";
 Vue.use(directives);
+import MyPlugin from "./plugins.js";
+Vue.use(MyPlugin);
 
-import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(Element)
+import Element from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+Vue.use(Element);
 
 Vue.config.productionTip = false;
 
