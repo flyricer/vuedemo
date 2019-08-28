@@ -3,6 +3,8 @@
     <button @click="changeValue(-1)">-1</button>
     <span>{{currentVal}}</span>
     <button @click="changeValue(1)">+1</button>
+    <p>issue</p>
+    <p>ss</p>
     <!-- <p>还需要一天完成这个分支</p> -->
   </div>
 </template>
