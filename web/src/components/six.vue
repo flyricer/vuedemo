@@ -3,7 +3,6 @@
     <button @click="changeValue(-1)">-1</button>
     <span>{{currentVal}}</span>
     <button @click="changeValue(1)">+1</button>
-    <p>issues</p>
   </div>
 </template>
 
