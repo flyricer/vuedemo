@@ -1,22 +1,32 @@
 <template>
   <div>
-    <counter :value="counter2Val" :on-minus="minusVal" :on-plus="plusVal"></counter>
+    <div ref="test">{{bet}}</div>
+    <button @click="handleClick">test</button>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      counter2Val: 0
-    };
+      test: 'start',
+      bet: {
+　　　　　　pokerState: 53,
+　　　　　　pokerHistory: 'local'
+　　　　}  
+    }
   },
   methods: {
-    minusVal() {
-      this.counter2Val--;
-    },
-    plusVal() {
-      this.counter2Val++;
+    handleClick() {
+      this.bet.pokerHistory = 'localhost'
     }
+  },
+  watch: {
+  　　bet: {
+  　　　　handler(newValue, oldValue) {
+  　　　　　　console.log(newValue);
+  　　　　},
+  　　　　deep: true
+  　　}
   }
-};
+}
 </script>

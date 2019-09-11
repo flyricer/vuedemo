@@ -5,7 +5,6 @@
     <current-table :person="person">
       <current-item :name="person.firstname"></current-item>
     </current-table>
-    <create-ele></create-ele>
     <one title="专题" :rightbtn="rightbtn"></one>
     <two></two>
     <three v-model="searchText" v-on:focus="onFocus"></three>
@@ -14,14 +13,9 @@
     <span>{{lovingVue}}</span>
     <Functional :level='1'>测试函数式组件</Functional>
     <Button type="danger" @click.native="log">success</Button>
-    <div class="transbox">
-      <transition name="fade">
-        <button class="transbtn" :key="isEditing" @click="isEditing = !isEditing">
-          {{ isEditing ? 'Save' : 'Edit' }}
-        </button>
-      </transition>
-    </div>
-    <div class="directive" v-style='Style' v-setcolor='fontcolors'>测试自定义指令</div>
+    <five :level='2'>测试render组件</five>
+    <six v-model="sixdata"></six>
+    <seven></seven>
   </div>
 </template>
 
@@ -30,13 +24,15 @@ import BrotherCard from "@/components/brother.vue";
 import SisterCard from "@/components/sister.vue";
 import CurrentTable from "@/components/currenttable.vue";
 import CurrentItem from "@/components/currentitem.vue";
-import CreateEle from "@/components/createElement.vue";
 import One from "@/components/one.vue";
 import Two from "@/components/two.vue";
 import Three from "@/components/three.vue";
 import Four from "@/components/four.vue";
 import Functional from "@/components/functional.vue";
 import Button from "@/components/button.vue";
+import Five from "@/components/five.vue";
+import Six from "@/components/six.vue";
+import Seven from "@/components/seven.vue";
 
 export default {
   data() {
@@ -45,11 +41,6 @@ export default {
         firstname: "jack",
         lastname: "ma"
       },
-      Style: {
-        backgroundColor: "#eeeeee",
-        width: '200px',
-        height: '50px'
-      },
       rightbtn: {
         name: "编辑"
       },
@@ -57,9 +48,8 @@ export default {
       lovingVue: '给你100块',
       isEditing: true,
       type: 'btn-success',
-      fontcolors: {
-        color: 'red'
-      }
+      sixdata: 10,
+      // message: '未更新'
     };
   },
   provide: function () {
@@ -69,7 +59,7 @@ export default {
   },
   methods: {
     getMap: function () {
-      console.log('getmaps')
+      console.log("getmaps")
     },
     divClick() {
       this.arr.push(5);
@@ -78,22 +68,23 @@ export default {
       console.log(1)
     },
     log() {
-      console.log('成功')
+      console.log("成功")
     }
   },
-  computed: {},
   components: {
     BrotherCard,
     SisterCard,
     CurrentTable,
     CurrentItem,
-    CreateEle,
     One,
     Two,
     Three,
     Four,
     Functional,
-    Button
+    Button,
+    Five,
+    Six,
+    Seven
   }
 };
 </script>
@@ -105,12 +96,13 @@ export default {
 .active {
   color: red;
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: all 1s ease;
 }
 .fade-leave-to {
   opacity: 0;
-  transform: translateX(-30px)
+  transform: translateX(-30px);
 }
 .fade-enter {
   opacity: 0;
@@ -125,12 +117,12 @@ export default {
   position: absolute;
 }
 .btn-success {
-  background-color: green
+  background-color: green;
 }
 .btn-danger {
-  background-color: red
+  background-color: red;
 }
 .btn-warning {
-  background-color: yellow
+  background-color: yellow;
 }
 </style>
