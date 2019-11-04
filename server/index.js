@@ -10,9 +10,9 @@ const cors = require('koa-cors');
 app.use(cors())
 // const static = require('koa-static')
 // app.use(static(__dirname + '/uploads'))
-const static = require('koa-static-router')
 require('./plugins/db')(app)
-const routes = require('./routes/admin')
+const router = require('./routes/admin')
+const static = require('koa-static-router')
 app.use(static({ dir: './uploads', router: '/uploads/' }))
 
 
@@ -27,10 +27,10 @@ app.use(static({ dir: './uploads', router: '/uploads/' }))
 //     }
 // };
 
-
 // app.use(handler)
-app.use(routes.routes()).use(routes.allowedMethods());
+
+app.use(router.routes()).use(router.allowedMethods());
 app.listen(3000, (ctx, next) => {
-    console.log(__dirname + '/uploads')
-    console.log(path.resolve(__dirname,'./uploads'))
+    // console.log(__dirname + '/uploads')
+    // console.log(path.resolve(__dirname,'./uploads'))
 })

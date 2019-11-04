@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "inflection": "^1.12.0",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-cors": "0.0.16",

@@ -1,32 +1,39 @@
 <template>
   <div>
-    <div ref="test">{{bet}}</div>
-    <button @click="handleClick">test</button>
+    <button @click="changeValue(-1)">-1</button>
+    <span>{{ getcount }}</span>
+    <button @click="changeValue(1)">+1</button>
+    <div @click="syncfunc">dd</div>
+    <slot></slot>
   </div>
 </template>
+
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      test: 'start',
-      bet: {
-　　　　　　pokerState: 53,
-　　　　　　pokerHistory: 'local'
-　　　　}  
+      
     }
+  },
+  props: {
+    title: String
+  },
+  computed: {
+    ...mapGetters([
+      'getcount'
+    ])
   },
   methods: {
-    handleClick() {
-      this.bet.pokerHistory = 'localhost'
+    ...mapMutations([
+      'changecount'
+    ]),
+    changeValue(value) {
+      this.changecount(value)
+    },
+    syncfunc() {
+      this.$emit('update:title', 'hhhhh')
     }
   },
-  watch: {
-  　　bet: {
-  　　　　handler(newValue, oldValue) {
-  　　　　　　console.log(newValue);
-  　　　　},
-  　　　　deep: true
-  　　}
-  }
-}
+};
 </script>

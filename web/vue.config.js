@@ -1,5 +1,6 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const  ExtractTextPlugin  =  require('extract-text-webpack-plugin');
 // const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',// 区分打包环境与开发环境
@@ -29,79 +30,79 @@ module.exports = {
     //           root: "_"//如果我们的库在浏览器中使用，需要提供一个全局的变量‘_’，等价于 var _ = (window._) or (_);
     //     }
     // },
-    chainWebpack: (config) => {
-        if (process.env.NODE_ENV === 'production') {
-            if (process.env.npm_config_report) {
-                config
-                    .plugin('webpack-bundle-analyzer')
-                    .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-                    .end();
-                config.plugins.delete('prefetch')
-            }
-        }
-    },// 添加 plugin 选项，比如可视化打包文件
+    // chainWebpack: (config) => {
+    //     if (process.env.NODE_ENV === 'production') {
+    //         if (process.env.npm_config_report) {
+    //             config
+    //                 .plugin('webpack-bundle-analyzer')
+    //                 .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    //                 .end();
+    //             config.plugins.delete('prefetch')
+    //         }
+    //     }
+    // },// 添加 plugin 选项，比如可视化打包文件
     // chainWebpack: (config) => {
     //     config.entry.app = ['babel-polyfill', './src/main.js'];
     // },
-    configureWebpack: {
-        mode: 'production',
-        // externals: {//不用打包到vendor.js中的文件
-        //     // 'vue': 'Vue',
-        //     // 'vue-router': 'VueRouter',
-        //     // 'vuex': 'Vuex',
-        //     // 'axios': 'axios',
-        //     element: 'element-ui'
-        // },
-        optimization: {
-            // minimize: true,
-            minimizer: [
-                new TerserPlugin({
-                  terserOptions: {
-                    compress: {
-                        warnings: false,
-                        drop_console: true,
-                        drop_debugger: true,
-                        pure_funcs: ['console.log']
-                    },
-                  },
-                }),
-            ],          
-            splitChunks: {
-                chunks: "async",
-                minSize: 30000, // 模块的最小体积
-                minChunks: 1, // 模块的最小被引用次数
-                maxAsyncRequests: 5, // 按需加载的最大并行请求数
-                maxInitialRequests: 3, // 一个入口最大并行请求数
-                automaticNameDelimiter: '~', // 文件名的连接符
-                // name: true,  //打包后的名称，默认是chunk的名字通过分隔符（默认是～）分隔
-                cacheGroups: { // 缓存组
-                    vendors: {
-                        test: /[\\/]node_modules[\\/]/,
-                        // chunks: 'initial',
-                        name: 'vendor',  // 打包后的文件名，任意命名    
-                        // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
-                        priority: 10  
-                    },
-                    default: {
-                        minChunks: 2,//一般为非第三方公共模块
-                        priority: -20,
-                        reuseExistingChunk: true
-                    }
-                }
-            },
-            runtimeChunk: {
-                name: 'manifest'
-            }
-        },
-        plugins: [
-            new CompressionPlugin({
-                algorithm: 'gzip',//算法
-                test: /\.(js|css)$/,
-                threshold: 10240,//只处理比这个值大的资源。按字节计算
-                minRatio: 0.8//只有压缩率比这个值小的资源才会被处理
-            })
-        ]
-    },
+    // configureWebpack: {
+    //     mode: 'production',
+    //     // externals: {//不用打包到vendor.js中的文件
+    //     //     // 'vue': 'Vue',
+    //     //     // 'vue-router': 'VueRouter',
+    //     //     // 'vuex': 'Vuex',
+    //     //     // 'axios': 'axios',
+    //     //     element: 'element-ui'
+    //     // },
+    //     optimization: {
+    //         // minimize: true,
+    //         minimizer: [
+    //             new TerserPlugin({
+    //               terserOptions: {
+    //                 compress: {
+    //                     warnings: false,
+    //                     drop_console: true,
+    //                     drop_debugger: true,
+    //                     pure_funcs: ['console.log']
+    //                 },
+    //               },
+    //             }),
+    //         ],          
+    //         splitChunks: {
+    //             chunks: "async",
+    //             minSize: 30000, // 模块的最小体积
+    //             minChunks: 1, // 模块的最小被引用次数
+    //             maxAsyncRequests: 5, // 按需加载的最大并行请求数
+    //             maxInitialRequests: 3, // 一个入口最大并行请求数
+    //             automaticNameDelimiter: '~', // 文件名的连接符
+    //             // name: true,  //打包后的名称，默认是chunk的名字通过分隔符（默认是～）分隔
+    //             cacheGroups: { // 缓存组
+    //                 vendors: {
+    //                     test: /[\\/]node_modules[\\/]/,
+    //                     // chunks: 'initial',
+    //                     name: 'vendor',  // 打包后的文件名，任意命名    
+    //                     // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+    //                     priority: 10  
+    //                 },
+    //                 default: {
+    //                     minChunks: 2,//一般为非第三方公共模块
+    //                     priority: -20,
+    //                     reuseExistingChunk: true
+    //                 }
+    //             }
+    //         },
+    //         runtimeChunk: {
+    //             name: 'manifest'
+    //         }
+    //     },
+    //     plugins: [
+    //         new CompressionPlugin({
+    //             algorithm: 'gzip',//算法
+    //             test: /\.(js|css)$/,
+    //             threshold: 10240,//只处理比这个值大的资源。按字节计算
+    //             minRatio: 0.8//只有压缩率比这个值小的资源才会被处理
+    //         })
+    //     ]
+    // },
     //如果想要引入babel-polyfill可以这样写
     // configureWebpack: (config) => {
     //   config.entry = ["babel-polyfill", "./src/main.js"]

@@ -47,4 +47,52 @@ const http = axios.create({
 //         return Promise.reject(error.response.data)   // 返回接口返回的错误信息
 //     });
 
+// export function get(url, params = {}) {
+//     params.t = new Date().getTime(); //get方法加一个时间参数,解决ie下可能缓存问题.
+//     return http({
+//       url: url,
+//       method: 'get',
+//       headers: {     
+//       },
+//       params
+//     })
+//   }
+  
+  
+//   //封装post请求
+//   export function post(url, data = {}) { 
+//     //默认配置 
+//     let sendObject={
+//       url: url,
+//       method: 'post',
+//       headers: {
+//         'Content-Type':'application/json;charset=UTF-8'       
+//       },
+//       data:data
+//     };
+//     sendObject.data=JSON.stringify(data);
+//     return http(sendObject)
+//   }
+  
+//   //封装put方法 (resfulAPI常用)
+//   export function put(url,data = {}){
+//     return http({
+//       url: url,
+//       method: 'put',
+//       headers: {
+//         'Content-Type':'application/json;charset=UTF-8'       
+//       },
+//       data:JSON.stringify(data)
+//     }) 
+//   }
+//   //删除方法(resfulAPI常用)
+//   export function deletes(url){
+//     return http({
+//       url: url,
+//       method: 'delete',
+//       headers: {}
+//     }) 
+//   }
+  
+
 export default http

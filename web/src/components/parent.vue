@@ -11,11 +11,13 @@
     <span>{{searchText}}</span>
     <four v-model="lovingVue"></four>
     <span>{{lovingVue}}</span>
-    <Functional :level='1'>测试函数式组件</Functional>
+    <Functional :level="1">测试函数式组件</Functional>
     <Button type="danger" @click.native="log">success</Button>
-    <five :level='2'>测试render组件</five>
+    <five :level="2">测试render组件</five>
     <six v-model="sixdata"></six>
-    <seven></seven>
+    <!-- <seven v-slot="slotProp">seven{{ slotProp.text }}</seven> -->
+    <seven :title.sync='message'>{{message}}</seven>
+    <eight></eight>
   </div>
 </template>
 
@@ -33,6 +35,7 @@ import Button from "@/components/button.vue";
 import Five from "@/components/five.vue";
 import Six from "@/components/six.vue";
 import Seven from "@/components/seven.vue";
+import Eight from "@/components/eight.vue";
 
 export default {
   data() {
@@ -44,32 +47,33 @@ export default {
       rightbtn: {
         name: "编辑"
       },
-      searchText: '',
-      lovingVue: '给你100块',
+      searchText: "",
+      lovingVue: "给你100块",
       isEditing: true,
-      type: 'btn-success',
+      type: "btn-success",
       sixdata: 10,
-      // message: '未更新'
+      // msg: '子组件',
+      message: "未更新"
     };
   },
-  provide: function () {
+  provide: function() {
     return {
       getMap: this.getMap
-    }
+    };
   },
   methods: {
-    getMap: function () {
-      console.log("getmaps")
+    getMap: function() {
+      console.log("getmaps");
     },
     divClick() {
       this.arr.push(5);
     },
     onFocus() {
-      console.log(1)
+      console.log(1);
     },
     log() {
-      console.log("成功")
-    }
+      console.log("成功");
+    },
   },
   components: {
     BrotherCard,
@@ -84,8 +88,13 @@ export default {
     Button,
     Five,
     Six,
-    Seven
-  }
+    Seven,
+    Eight
+  },
+  mounted() {
+    console.log(window.location.href.split('#')[0])
+    console.log(window.location.href)
+  },
 };
 </script>
 
@@ -124,5 +133,9 @@ export default {
 }
 .btn-warning {
   background-color: yellow;
+}
+.scrollbox {
+  height: 100%;
+  overflow-y: scroll
 }
 </style>
