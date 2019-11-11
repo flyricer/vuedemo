@@ -2,10 +2,15 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Main from "./views/Main.vue";
+
 import CategoryCreate from "./views/CategoryCreate.vue";
 import CategoryList from "./views/CategoryList.vue";
+
 import ItemCreate from "./views/ItemCreate.vue";
 import ItemList from "./views/ItemList.vue";
+
+import AdminUserEdit from './views/AdminUserEdit.vue'
+import AdminUserList from './views/AdminUserList.vue'
 
 Vue.use(Router);
 
@@ -14,6 +19,10 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    // {
+    //   path: '',
+    //   redirect: '/categories/list'
+    // },
     {
       path: "/",
       name: "main",
@@ -26,8 +35,18 @@ const router = new Router({
         { path: "/items/create", component: ItemCreate },
         { path: "/items/list", component: ItemList },
         { path: "/items/edit/:id", component: ItemCreate, props: true },
+
+        { path: "/admin_users/create", component: AdminUserEdit },
+        { path: "/admin_users/list", component: AdminUserList },
+        { path: "/admin_users/edit/:id", component: AdminUserEdit, props: true },
       ]
     },
+    {
+      path: "/login",
+      name: "Login",
+      component: () => import("./views/Login.vue"),
+      meta: { isPublic: true}
+    }
     // {
     //   path: "/about",
     //   name: "about",
@@ -42,20 +61,14 @@ const router = new Router({
 
 //注册全局钩子用来拦截导航
 router.beforeEach((to, from, next) => {
-  //获取store里面的token
-  //判断要去的路由有没有requiresAuth
-  if(to.meta.requiresAuth) {
-    if(store.state.token) {
-      next();
-    } else {
+  //判断要去的路由有没有requiresAuth或isPublic
+  if(!to.meta.isPublic && !localStorage.token) {
       next({
         path: '/login',
         query: { redirect: to.fullPath } // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
       });
-    }
-  } else {
-    next();
   } 
+  next();
 });
 
 export default router;

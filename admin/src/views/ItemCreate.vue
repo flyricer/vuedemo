@@ -13,9 +13,10 @@
       <el-form-item label="图标">
         <el-upload
           class="avatar-uploader"
-          :action="$http.defaults.baseURL + '/upload'"
+          :action="uploadUrl"
+          :headers="getAuthHeaders()"
           :show-file-list="false"
-          :on-success="handleAvatarSuccess"
+          :on-success="afterUpload"
         >
           <img v-if="model.icon" :src="model.icon" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -43,9 +44,9 @@ export default {
     async save() {
       let res;
       if (this.id) {
-        res = await this.$http.put(`/items/${this.id}`, this.model);
+        res = await this.$http.put(`/api/items/${this.id}`, this.model);
       } else {
-        res = await this.$http.post("/items", this.model);
+        res = await this.$http.post("/api/items", this.model);
       }
       this.$router.push("/items/list");
       this.$message({
@@ -54,7 +55,7 @@ export default {
       });
     },
     async fetch() {
-      const res = await this.$http.get(`/items/${this.id}`);
+      const res = await this.$http.get(`/api/items/${this.id}`);
       this.model = res.data;
     },
     // async fetchParents() {
@@ -62,10 +63,12 @@ export default {
     //   this.parents = res.data;
     // }
 
-    handleAvatarSuccess(res) {
-      console.log(res.url)
-      this.$set(this.model, "icon", res.url)
-      console.log(this.model.icon)
+    afterUpload(file) {
+      console.log(file)
+      // console.log(file)
+      // const url = `http://localhost:3000/uploads/${file.filename}`
+      // const url = URL.createObjectURL(file.raw)
+      this.$set(this.model, "icon", file.url)
     },
     // beforeAvatarUpload(file) {
     //   const isJPG = file.type === "image/jpeg";

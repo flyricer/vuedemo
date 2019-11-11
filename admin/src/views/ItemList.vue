@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get("/items");
+      const res = await this.$http.get("/api/items");
       this.items = res.data;
     },
     async remove(row) {
@@ -46,7 +46,7 @@ export default {
         type: "warning"
       })
         .then(async () => {
-          const res = await this.$http.delete(`/items/${row._id}`);
+          const res = await this.$http.delete(`/api/items/${row._id}`);
           this.$message({
             type: "success",
             message: "删除成功!"

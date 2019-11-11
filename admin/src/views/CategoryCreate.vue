@@ -26,16 +26,17 @@ export default {
   data() {
     return {
       model: {},
-      parents: []
+      parents: [],
+      imglist: []
     };
   },
   methods: {
     async save() {
       let res;
       if (this.id) {
-        res = await this.$http.put(`/categories/${this.id}`, this.model);
+        res = await this.$http.put(`/api/categories/${this.id}`, this.model);
       } else {
-        res = await this.$http.post("/categories", this.model);
+        res = await this.$http.post("/api/categories", this.model);
       }
       this.$router.push("/categories/list");
       this.$message({
@@ -44,13 +45,14 @@ export default {
       });
     },
     async fetch() {
-      const res = await this.$http.get(`/categories/${this.id}`);
+      const res = await this.$http.get(`/api/categories/${this.id}`);
       this.model = res.data;
     },
     async fetchParents() {
-      const res = await this.$http.get("/categories");
+      const res = await this.$http.get("/api/categories");
       this.parents = res.data;
     }
+
   },
   created() {
     this.id && this.fetch();
