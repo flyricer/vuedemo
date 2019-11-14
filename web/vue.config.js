@@ -51,10 +51,10 @@ module.exports = {
                 .loader('sass-resources-loader')
                 .options({
                     // Provide path to the file with resources
-                    resources: './assets/css/style.scss',
+                    resources: './src/assets/scss/style.scss',
 
                     // Or array of paths
-                    // resources: ['./assets/css/style.scss', './path/to/mixins.scss']
+                    // resources: ['./assets/scss/style.scss', './path/to/mixins.scss']
                 })
                 .end()
         })

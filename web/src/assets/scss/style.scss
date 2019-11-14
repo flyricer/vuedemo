@@ -1,0 +1,112 @@
+@import './variables';
+// reset
+* {
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 13px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2em;
+    background: #f1f1f1;
+    -webkit-font-smoothing: antialiased;
+}
+.flex-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.w-100 {
+    width: 100%;
+}
+.h-100 {
+    height: 100%;
+}
+.text-ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.clearfix::after {
+    content: '';
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.dp-ib {
+    display: inline-block;
+}
+
+// text align
+@each $var in (left, center, right) {
+    .text-#{$var} {
+      text-align: $var !important;
+    }
+}
+// borders
+@each $dir in (top, right, bottom, left) {
+    .border-#{$dir} {
+        border-#{$dir}: 1px solid #999999;
+    }
+}
+// background-img
+@mixin sprite($url) {
+    background: url($url) no-repeat;
+    background-size: 28.846154rem;
+}
+
+
+$base-font-size: 1rem;
+$font-sizes: (
+  //12px
+    s: .923077,
+  //14px
+    m: 1.076923,
+  //16px,,,,
+    nm: 1.230769,
+  //18px,,,,
+    bg: 1.384615,
+  //20px,,,,
+    lg: 1.538462,
+);
+
+// font-size
+@each $sizeKey, $size in $font-sizes {
+    .fs-#{$sizeKey} {
+      font-size: $size * $base-font-size;
+    }
+}
+
+$colors: (
+  'primary': #db9e3f,
+  'danger': #791a15,
+  'success': #388e3c,
+  'white': #fff,
+  'light': #f9f9f9,
+  'grey': #999,
+  'darkg': #666,
+  'dark': #333333,
+);
+$border-color: map-get($colors, 'light');
+
+// colors
+@each $colorKey, $color in $colors {
+    .text-#{$colorKey} {
+      color: $color;
+    }
+    .bg-#{$colorKey} {
+      background-color: $color;
+    }
+}
