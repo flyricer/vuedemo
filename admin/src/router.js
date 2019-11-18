@@ -12,6 +12,9 @@ import ItemList from "./views/ItemList.vue";
 import AdminUserEdit from './views/AdminUserEdit.vue'
 import AdminUserList from './views/AdminUserList.vue'
 
+import ArticleCreate from './views/ArticleCreate.vue'
+import ArticleList from './views/ArticleList.vue'
+
 Vue.use(Router);
 
 
@@ -39,6 +42,10 @@ const router = new Router({
         { path: "/admin_users/create", component: AdminUserEdit },
         { path: "/admin_users/list", component: AdminUserList },
         { path: "/admin_users/edit/:id", component: AdminUserEdit, props: true },
+
+        { path: "/articles/create", component: ArticleCreate },
+        { path: "/articles/list", component: ArticleList },
+        { path: "/articles/edit/:id", component: ArticleCreate, props: true },
       ]
     },
     {

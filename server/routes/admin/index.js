@@ -57,7 +57,7 @@ module.exports = app => {
 
     // 获取数据
     router.get('/api/:resource', async (ctx, next) => {
-        const items = await ctx.Model.find().populate('parent').limit(10)
+        const items = await ctx.Model.find().populate('parent').limit(100)
         ctx.body = items
     })
 

@@ -22,7 +22,7 @@ const cors = require('koa-cors');
 app.use(cors())
 require('./plugins/db')(app)
 require('./routes/admin')(app)
-// const router = require('./routes/admin')
+require('./routes/web')(app)
 const static = require('koa-static-router')
 app.use(static({ dir: './uploads', router: '/uploads/' }))
 

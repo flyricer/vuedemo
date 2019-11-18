@@ -20,6 +20,17 @@
 
         <el-submenu index="2">
           <template slot="title">
+            <i class="el-icon-message"></i>文章管理
+          </template>
+          <el-menu-item-group>
+            <template slot="title">分类</template>
+            <el-menu-item index="/articles/create">新建文章</el-menu-item>
+            <el-menu-item index="/articles/list">文章列表</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+
+        <el-submenu index="3">
+          <template slot="title">
             <i class="el-icon-message"></i>系统管理
           </template>
           <el-menu-item-group>
